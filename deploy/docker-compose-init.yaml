@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+#  database:
+#    image: mysql:5.7
+#    restart: always
+#    container_name: arvancloud-mysql-container
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=password
+#      - MYSQL_DATABASE=arvancloud
+#    ports:
+#      - "3307:3306"
+#    expose:
+#      - '3307'
+#    volumes:
+#      - my-db:/var/lib/mysql
+  migrate:
+    build:
+      context: ..
+      dockerfile: wallet-service/deploy/Dockerfile-migrate
+
+  seed:
+    build:
+      context: ..
+      dockerfile: wallet-service/deploy/Dockerfile-seed
+
+
+volumes:
+  my-db:
+  database:
+    driver: local
