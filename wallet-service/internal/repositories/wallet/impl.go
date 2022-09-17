@@ -35,5 +35,5 @@ func (r *WalletRepository) createWallet(newWallet *models.Wallet) (*models.Walle
 func (r *WalletRepository) IncreaseAmountWithTransaction(tx *gorm.DB, wallet *models.Wallet, amount float64) error {
 	wallet.Inventory += amount
 	wallet.Balance += amount
-	return tx.Updates(&wallet).Error
+	return tx.Preload("WalletTransaction").Updates(&wallet).Error
 }

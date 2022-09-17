@@ -1,9 +1,9 @@
 {
-  "Host": "localhost",
-  "Port": 3307,
+  "Host": "database:3306",
+  "Port": 3306,
   "Database": "arvancloud",
   "Username": "root",
-  "Password": "password",
+  "Password": "",
   "Secret": "secret",
-  "MYSQL_ROOT_PASSWORD": "password"
+  "MYSQL_ROOT_PASSWORD": ""
 }

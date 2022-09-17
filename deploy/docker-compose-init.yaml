@@ -1,18 +1,18 @@
 version: '3.8'
 services:
-#  database:
-#    image: mysql:5.7
-#    restart: always
-#    container_name: arvancloud-mysql-container
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=password
-#      - MYSQL_DATABASE=arvancloud
-#    ports:
-#      - "3307:3306"
-#    expose:
-#      - '3307'
-#    volumes:
-#      - my-db:/var/lib/mysql
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=arvancloud
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "3306:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - arvancloud
   migrate:
     build:
       context: ..
@@ -28,3 +28,10 @@ volumes:
   my-db:
   database:
     driver: local
+
+
+
+networks:
+  arvancloud:
+    name: arvancloud-network
+    driver: bridge
