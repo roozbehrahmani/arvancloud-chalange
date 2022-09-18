@@ -4,15 +4,29 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=P@SSWORD
       - MYSQL_DATABASE=arvancloud
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    ports:
-      - "3306:3306"
-    volumes:
-      - my-db:/var/lib/mysql
+      - MYSQL_USER=golang
+      - MYSQL_PASSWORD=password
     networks:
       - arvancloud
+    volumes:
+      - my-db:/var/lib/mysql
+  discount:
+    build:
+      context: ..
+      dockerfile: discount-service/deploy/Dockerfile
+    ports:
+      - '8080:8080'
+    links:
+      - database
+    depends_on:
+      - database
+    container_name: arvancloud-discount-container
+    networks:
+      - arvancloud
+
   wallet:
     build:
       context: ..
@@ -21,20 +35,11 @@ services:
       - '8081:8081'
     depends_on:
       - database
+      - discount
     links:
       - database
+      - discount
     container_name: arvancloud-wallet-container
-    networks:
-      - arvancloud
-  discount:
-    build:
-      context: ..
-      dockerfile: discount-service/deploy/Dockerfile
-    ports:
-      - '8080:8080'
-    depends_on:
-      - database
-    container_name: arvancloud-discount-container
     networks:
       - arvancloud
 

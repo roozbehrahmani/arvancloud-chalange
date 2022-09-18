@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:1.19
 
 COPY ./wallet-service /go/src/github.com/roozbehrahmani/abrarvan_test
 WORKDIR /go/src/github.com/roozbehrahmani/abrarvan_test

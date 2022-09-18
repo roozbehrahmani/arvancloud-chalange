@@ -14,9 +14,9 @@ type Connections struct {
 }
 
 func Init(ctx context.Context, cnf *config.Config) (*Connections, error) {
-	log.Printf(cnf.MysqlDatabase.Host)
+	log.Printf(cnf.MysqlDatabase.MysqlHost)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local", cnf.MysqlDatabase.MysqlUsername, cnf.MysqlDatabase.MysqlPassword, cnf.MysqlDatabase.MysqlHost, cnf.MysqlDatabase.MysqlPort, cnf.MysqlDatabase.MysqlDatabase)
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local", cnf.Username, cnf.Password, cnf.Host, cnf.Port, cnf.Database)
 	//log.Printf("Connecting to Postgres: ", dsn.String())
 	log.Printf("Connecting to Mysql: ", dsn)
 	//dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"

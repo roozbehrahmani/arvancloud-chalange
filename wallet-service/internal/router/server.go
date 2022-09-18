@@ -2,6 +2,7 @@ package router
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/roozbehrahmani/abrarvan_test/config"
 	application "github.com/roozbehrahmani/abrarvan_test/internal/app"
@@ -26,7 +27,7 @@ func Initialize(ctx context.Context, cnf *config.Config, app *application.Applic
 func (s *Server) Run() error {
 	r := s.Routes()
 
-	err := r.Run("127.0.0.1:8081")
+	err := r.Run(fmt.Sprintf("%s:%d", s.cnf.ServerIP, s.cnf.ServerPort))
 
 	if err != nil {
 		log.Printf("there was an error when calling routes: %v", err)

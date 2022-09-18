@@ -15,7 +15,7 @@ type channelStruct struct {
 func (a *Application) ChargeWallet() func(c *gin.Context) {
 	return func(c *gin.Context) {
 
-		var ChargeRequest models.ChargeCodeRequest
+		var ChargeRequest models.DiscountServiceChargeWithCodeAndPhoneRequest
 
 		err := c.ShouldBindJSON(&ChargeRequest)
 		if err != nil {

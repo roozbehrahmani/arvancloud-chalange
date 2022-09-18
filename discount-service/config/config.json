@@ -1,9 +1,14 @@
 {
-  "Host": "database:3306",
-  "Port": 3306,
-  "Database": "arvancloud",
-  "Username": "root",
-  "Password": "",
-  "Secret": "secret",
-  "MYSQL_ROOT_PASSWORD": "password"
+  "MysqlHost": "database",
+  "MysqlPort": 3306,
+  "MysqlDatabase": "arvancloud",
+  "MysqlUsername": "golang",
+  "MysqlPassword": "password",
+  "MysqlRootPassword": "P@SSWORD",
+  "WalletServiceSecret": "secret",
+  "WalletServiceHost": "wallet",
+  "WalletServicePORT": 8081,
+  "ServerPort": 8080,
+  "ServerIP": "0.0.0.0"
 }
+

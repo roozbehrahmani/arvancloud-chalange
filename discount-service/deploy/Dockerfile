@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:1.19
 
 COPY ./discount-service /go/src/github.com/roozbehrahmani/arvancloud-chalange
 WORKDIR /go/src/github.com/roozbehrahmani/arvancloud-chalange

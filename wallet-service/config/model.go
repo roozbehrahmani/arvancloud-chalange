@@ -2,22 +2,22 @@ package config
 
 type Config struct {
 	MysqlDatabase
+	DiscountService
+	ServerIP   string
 	ServerPort int
 	Secret     string
 }
 
-type PGDatabase struct {
-	Host     string
-	port     string
-	Database string
-	Username string
-	Password string
+type DiscountService struct {
+	DiscountServiceHost string
+	DiscountServicePORT int
 }
 
 type MysqlDatabase struct {
-	Host     string
-	Port     int
-	Database string
-	Username string
-	Password string
+	MysqlHost         string
+	MysqlPort         int
+	MysqlDatabase     string
+	MysqlUsername     string
+	MysqlPassword     string
+	MysqlRootPassword string
 }

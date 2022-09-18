@@ -6,6 +6,7 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/roozbehrahmani/abrarvan_test/internal/app/helpers"
 	"github.com/roozbehrahmani/abrarvan_test/internal/models"
+	"log"
 	"net/http"
 )
 
@@ -37,14 +38,16 @@ func (s *service) ChargeWithCodeAndPhone(code string, phone string) (map[string]
 	client := resty.New()
 	var chargeWalletPostRequest models.ChargeWalletRequest
 	// Call PrinterService via RESTFull interface
-	requestUrl := fmt.Sprintf("http://127.0.0.1:%d/wallet/charge", 8081)
+	requestUrl := fmt.Sprintf("%s:%d/wallet/charge", s.cnf.WalletService.WalletServiceHost, s.cnf.WalletService.WalletServicePORT)
+	log.Printf("request to wallet ip : ", requestUrl)
+
 	response, err := client.R().
-		SetBody(models.ChargeWalletRequest{Phone: phone, Amount: chargeCode.Amount, Secret: s.cnf.Secret}).
+		SetBody(models.ChargeWalletRequest{Phone: phone, Amount: chargeCode.Amount, Secret: s.cnf.WalletServiceSecret}).
 		SetResult(&chargeWalletPostRequest).
 		Post(requestUrl)
 
 	if response.StatusCode() != http.StatusCreated {
-		tx.RollbackTo("firstState")
+		tx.Rollback()
 		return nil, &helpers.CanNotWalletUpdateError{}
 	}
 

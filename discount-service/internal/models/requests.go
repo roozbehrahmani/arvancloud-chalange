@@ -1,6 +1,6 @@
 package models
 
-type ChargeCodeRequest struct {
+type DiscountServiceChargeWithCodeAndPhoneRequest struct {
 	Code  string `json:"code" binding:"required"`
 	Phone string `json:"phone" binding:"required|numeric"`
 }

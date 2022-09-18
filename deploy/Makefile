@@ -10,5 +10,5 @@ down: ## shut down server
 init: ## shut down server
 	@docker-compose -f docker-compose-init.yaml up -d --build --force-recreate
 	@sleep 5
-	@#docker-compose -f docker-compose-init.yaml down --remove-orphans
+	@docker-compose -f docker-compose-init.yaml down --remove-orphans
 .PHONY: down
