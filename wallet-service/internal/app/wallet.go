@@ -34,7 +34,6 @@ func (a *Application) GetWallet() func(c *gin.Context) {
 func (a *Application) ChargeWallet() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		var ChargeWalletRequest models.ChargeWalletRequest
-		c.PostForm("")
 		err := c.ShouldBindJSON(&ChargeWalletRequest)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

@@ -6,8 +6,8 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/roozbehrahmani/abrarvan_test/internal/app/helpers"
 	"github.com/roozbehrahmani/abrarvan_test/internal/models"
-	"log"
 	"net/http"
+	"strings"
 )
 
 func (s *service) ChargeWithCodeAndPhone(code string, phone string) (map[string]interface{}, error) {
@@ -38,25 +38,29 @@ func (s *service) ChargeWithCodeAndPhone(code string, phone string) (map[string]
 	client := resty.New()
 	var chargeWalletPostRequest models.ChargeWalletRequest
 	// Call PrinterService via RESTFull interface
-	requestUrl := fmt.Sprintf("%s:%d/wallet/charge", s.cnf.WalletService.WalletServiceHost, s.cnf.WalletService.WalletServicePORT)
-	log.Printf("request to wallet ip : ", requestUrl)
+	requestUrl := fmt.Sprintf("http://%s:%d/wallet/charge", s.cnf.WalletService.WalletServiceHost, s.cnf.WalletService.WalletServicePORT)
+	requestUrl = strings.TrimSpace(requestUrl)
 
 	response, err := client.R().
 		SetBody(models.ChargeWalletRequest{Phone: phone, Amount: chargeCode.Amount, Secret: s.cnf.WalletServiceSecret}).
 		SetResult(&chargeWalletPostRequest).
 		Post(requestUrl)
 
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+
 	if response.StatusCode() != http.StatusCreated {
 		tx.Rollback()
 		return nil, &helpers.CanNotWalletUpdateError{}
 	}
 
-	//bodyString := string(bodyBytes)
-	// close response body
-	//response.Body().Close()
-
 	tx.Commit()
+
 	wallet := make(map[string]interface{})
+
 	err = json.Unmarshal(response.Body(), &wallet)
+
 	return wallet, nil
 }

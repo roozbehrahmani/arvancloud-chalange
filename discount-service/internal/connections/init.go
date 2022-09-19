@@ -21,6 +21,7 @@ func Init(ctx context.Context, cnf *config.Config) (*Connections, error) {
 	log.Printf("Connecting to Mysql: ", dsn)
 	//dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	//"root:@tcp(127.0.0.1:3306)/milyoonex?charset=utf8&parseTime=True&loc=Local"
+
 	db, err := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,   // data source name
 		DefaultStringSize:         256,   // default size for string fields
