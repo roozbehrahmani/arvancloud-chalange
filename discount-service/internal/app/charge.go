@@ -5,6 +5,7 @@ import (
 	"github.com/roozbehrahmani/abrarvan_test/internal/models"
 	charge_code_job "github.com/roozbehrahmani/abrarvan_test/internal/queue/jobs/chargeCode"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/validator.v2"
 	"net/http"
 )
 
@@ -14,6 +15,11 @@ func (a *Application) ChargeWallet() func(c *gin.Context) {
 
 		err := c.ShouldBindJSON(&ChargeRequest)
 		if err != nil {
+			logrus.Error(err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := validator.Validate(ChargeRequest); err != nil {
 			logrus.Error(err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

@@ -5,6 +5,7 @@ import (
 	"github.com/roozbehrahmani/abrarvan_test/internal/app/helpers"
 	"github.com/roozbehrahmani/abrarvan_test/internal/models"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/validator.v2"
 	"net/http"
 )
 
@@ -39,6 +40,12 @@ func (a *Application) ChargeWallet() func(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+		if err := validator.Validate(ChargeWalletRequest); err != nil {
+			logrus.Error(err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
 		if ChargeWalletRequest.Secret != a.Config.Secret {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": helpers.UnauthorizedRequestWalletChargingError{}})
 			return

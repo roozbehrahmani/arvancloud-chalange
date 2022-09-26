@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"phone\" : \"123456\",\n    \"code\": \"free_5000\"\n}",
+					"raw": "{\n    \"phone\" : \"09122211122\",\n    \"code\": \"free_5000\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,7 +55,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8080/wallet/1521",
+					"raw": "http://0.0.0.0:8081/wallet/09122211122",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -63,10 +63,10 @@
 						"0",
 						"0"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"wallet",
-						"1521"
+						"09122211122"
 					]
 				}
 			},

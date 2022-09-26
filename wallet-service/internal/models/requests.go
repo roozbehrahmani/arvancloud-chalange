@@ -1,8 +1,7 @@
 package models
 
 type ChargeWalletRequest struct {
-	Phone  string  `json:"phone" binding:"required"`
-	Amount float64 `json:"amount" binding:"required"`
-	Secret string  `json:"secret" binding:"required"`
+	Phone  string  `json:"phone" validate:"nonnil,min=10,max=11,regexp=(9)[0-9]{9}"`
+	Amount float64 `json:"amount" validate:"nonzero"`
+	Secret string  `json:"secret" validate:"nonnil"`
 }
-
