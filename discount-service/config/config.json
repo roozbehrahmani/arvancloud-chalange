@@ -9,6 +9,7 @@
   "WalletServiceHost": "172.31.1.4",
   "WalletServicePORT": 8081,
   "ServerPort": 8080,
-  "ServerIP": "0.0.0.0"
+  "ServerIP": "0.0.0.0",
+  "MaxWorkerForChargeWallet": 100
 }
 

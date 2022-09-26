@@ -11,5 +11,5 @@ type service struct {
 	db             *gorm.DB
 	cnf            *config.Config
 	userRepo       *user_repository.UserRepository
-	chargeCodeRepo *charge_code_repository.ChargeCodeRepository
+	ChargeCodeRepo *charge_code_repository.ChargeCodeRepository
 }

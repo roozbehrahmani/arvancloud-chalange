@@ -4,7 +4,6 @@ import (
 	"github.com/roozbehrahmani/abrarvan_test/internal/app/helpers"
 	"github.com/roozbehrahmani/abrarvan_test/internal/models"
 	"gorm.io/gorm"
-	"gorm.io/gorm/clause"
 	"time"
 )
 
@@ -29,7 +28,7 @@ func (r *ChargeCodeRepository) IncreaseChargeCodeUsageWithTransaction(tx *gorm.D
 	if chargeCode.CurrentUsage >= chargeCode.MaxUsage {
 		chargeCode.Status = false
 	}
-	return tx.Clauses(clause.Locking{Strength: "UPDATE"}).Updates(&chargeCode).Error
+	return tx.Updates(&chargeCode).Error
 }
 
 func (r *ChargeCodeRepository) UserCanUseChargeCode(userId uint, chargeCodeId uint) bool {

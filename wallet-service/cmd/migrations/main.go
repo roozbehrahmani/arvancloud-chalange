@@ -31,9 +31,6 @@ func main() {
 	err = conns.MysqlDatabase.AutoMigrate(models.User{}, models.Wallet{}, models.WalletTransaction{}, models.ChargeCode{})
 	checkHasError(err)
 
-	//err = conns.MysqlDatabase.AutoMigrate(&models.Wallet{})
-	//checkHasError(err)
-
 }
 
 func checkHasError(err error) {

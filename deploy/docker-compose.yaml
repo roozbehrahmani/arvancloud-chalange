@@ -36,10 +36,8 @@ services:
       - '8081:8081'
     depends_on:
       - database
-      - discount
     links:
       - database
-      - discount
     container_name: arvancloud-wallet-container
     networks:
       arvancloud:

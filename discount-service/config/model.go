@@ -3,8 +3,9 @@ package config
 type Config struct {
 	MysqlDatabase
 	WalletService
-	ServerIP   string
-	ServerPort int
+	ServerIP                 string
+	ServerPort               int
+	MaxWorkerForChargeWallet int
 }
 
 type WalletService struct {

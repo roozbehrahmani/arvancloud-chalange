@@ -12,6 +12,6 @@ func Initialize(db *gorm.DB, cnf *config.Config, userRepo *user_repository.UserR
 		db:             db,
 		cnf:            cnf,
 		userRepo:       userRepo,
-		chargeCodeRepo: chargeCodeRepo,
+		ChargeCodeRepo: chargeCodeRepo,
 	}
 }

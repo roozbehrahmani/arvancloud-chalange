@@ -7,5 +7,3 @@ import (
 type WalletRepository struct {
 	database *gorm.DB
 }
-
-var database *gorm.DB
